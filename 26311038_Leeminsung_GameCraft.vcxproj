@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{07e9c153-f67c-4077-aaa2-330965fab014}</ProjectGuid>
+    <RootNamespace>My26311038LeeminsungGameCraft</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <Import Project="packages\glc2d.0.1.0.8\build\native\glc2d.props" Condition="Exists('packages\glc2d.0.1.0.8\build\native\glc2d.props')" />
+  <PropertyGroup>
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glc2d_win32_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glc2d_win32_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glc2d_x64_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>glc2d_x64_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="NuGet.Config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\RunAndGun_Desert_Assets\animations.json" />
+    <None Include="resource\RunAndGun_Desert_Assets\backgrounds\desert_full_wide.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\backgrounds\desert_stage_1280x720.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_damaged.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_explosion.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_hit_flash.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_idle.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_roll.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_shoot.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_wreck.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\bullet_impact.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\bullet.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\giant_explosion.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\grenade_explosion.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\grenade_projectile.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\muzzle_flash.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\ricochet_sparks.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\sand_dust.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\effects\tank_shell.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_aim.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_death.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_hit_flash.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_idle.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_shoot.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_walk_01.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_walk_02.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_alarm.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_destroyed.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_hit.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_idle.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_raise.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_shoot.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ammo_icon.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ammo_label.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_hp_empty.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_hp_full.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_label.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\game_over.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\game_title.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\grenade_icon.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\health_icon.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\hp_label.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\hud_panel.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\medal_icon.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\mission_01.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\mission_clear.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\0.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\1.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\2.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\3.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\4.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\5.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\6.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\7.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\8.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\9.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\pause.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\player_portrait.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\points_100.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\points_500.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\press_start.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ready.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\retry.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\score_label.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\hud\settings_icon.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\barrel_explosion.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\crate_broken.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\crate_damaged.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\door_open.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\finish_flag.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\lever_on.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\ammo_box.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\bonus_medal.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\grenade.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\health_kit.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\heavy_machinegun.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\items\shotgun.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\crouch.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\death.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\hit_flash.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\hit.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\idle.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\jump.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\reload.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\run_01.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\run_02.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_crouch.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_horizontal.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_up.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\player\throw_grenade.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\Preview.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\barbed_wire.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\crate_dark.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\explosive_barrel.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\lever_off.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\metal_door.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\radio.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\road_sign.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\sandbags.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\warning_light.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\props\wooden_crate.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\README_ko.md" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\big_mesa.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\dead_tree.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\dry_bush.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\far_mountains.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\guard_tower.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\small_dune.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-07d41362-651c-44d7-8c94-58c390b27339.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-22df239f-7baa-48c5-a925-89a527df8abf.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-363757ae-2bb3-4c12-9046-dab254a334d8.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-4b5fb751-fb7a-4877-aaf4-859dd77ffd30.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-50cab900-bdc8-4077-8ee0-977ef65b953b.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-7adf858a-57d4-47dc-beca-951aa7812b1b.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-810589ba-b292-4670-accc-ac2de6734efe.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-81da4855-53b6-4e79-95a9-10d84759edf7.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-8bd0d9c1-11bc-4714-b577-3b12923612e1.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-9defc004-1fac-46f6-a74c-a6900e640869.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e000b44c-45fa-4920-b005-d9c427110b4b.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e5b72acc-4671-409f-beac-9689b5a0ce94.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e8593a1c-5942-4f8d-84b6-e03137af682b.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_left.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_middle.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_right.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\reinforced_concrete.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\rock_wall.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_fill.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_left.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_right.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_top.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sandstone_brick.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\spike_trap.png" />
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\wooden_bridge.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('packages\glc2d.0.1.0.8\build\native\glc2d.props')" Text="GLC2D package is missing. Restore NuGet packages for this solution (see README.md)." />
+    <Error Condition="!Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="DirectX package is missing. Restore NuGet packages for this solution (see README.md)." />
+  </Target>
+  <Target Name="CopyGameAssets" AfterTargets="Build">
+    <ItemGroup>
+      <GameAsset Include="$(ProjectDir)resource\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(GameAsset)" DestinationFiles="@(GameAsset-&gt;'$(OutDir)resource\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

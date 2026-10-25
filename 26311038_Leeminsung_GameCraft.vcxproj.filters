@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets">
+      <UniqueIdentifier>{98a05412-0667-4eb5-a167-a3dc078d6083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\backgrounds">
+      <UniqueIdentifier>{3708e52d-0f83-4180-8743-0c6e85c9c981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\boss">
+      <UniqueIdentifier>{245d8a50-e55d-4fd9-a421-eaea11a86475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\effects">
+      <UniqueIdentifier>{1ebcba27-cb19-44d0-a642-8767920f6f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\enemies">
+      <UniqueIdentifier>{6b633417-4cd0-44db-82af-98838bcc5cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\hud">
+      <UniqueIdentifier>{165fc181-decd-4fda-99ea-fff16f6d076f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\hud\numbers">
+      <UniqueIdentifier>{d383996e-6dd4-4578-9cdc-c4857879c772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\interactive">
+      <UniqueIdentifier>{84e8cb51-83e8-4fde-96a1-e2ad6ac5641a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\items">
+      <UniqueIdentifier>{a14efd50-c060-43b7-9d28-43af22deec8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\player">
+      <UniqueIdentifier>{932f4f98-1ef1-4bda-9aff-be02d62b5ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\props">
+      <UniqueIdentifier>{bc440b4b-75b6-4543-8baf-31b8deadd7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\scenery">
+      <UniqueIdentifier>{4e28b5a0-b6a2-437b-b8ae-a6274c9dd630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\sheets">
+      <UniqueIdentifier>{3adcfb98-43b6-47de-b0fb-c31e1e047906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\RunAndGun_Desert_Assets\tiles">
+      <UniqueIdentifier>{114a9991-3e4d-4a62-aa36-b0791299a3e2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resource\RunAndGun_Desert_Assets\animations.json">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\backgrounds\desert_full_wide.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\backgrounds</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\backgrounds\desert_stage_1280x720.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\backgrounds</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_damaged.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_explosion.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_hit_flash.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_idle.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_roll.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_shoot.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\boss\tank_wreck.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\boss</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\bullet_impact.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\bullet.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\giant_explosion.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\grenade_explosion.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\grenade_projectile.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\muzzle_flash.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\ricochet_sparks.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\sand_dust.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\effects\tank_shell.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\effects</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_aim.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_death.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_hit_flash.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_idle.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_shoot.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_walk_01.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\soldier_walk_02.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_alarm.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_destroyed.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_hit.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_idle.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_raise.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\enemies\turret_shoot.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\enemies</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ammo_icon.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ammo_label.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_hp_empty.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_hp_full.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\boss_label.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\game_over.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\game_title.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\grenade_icon.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\health_icon.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\hp_label.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\hud_panel.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\medal_icon.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\mission_01.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\mission_clear.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\0.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\1.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\2.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\3.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\4.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\5.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\6.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\7.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\8.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\numbers\9.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud\numbers</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\pause.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\player_portrait.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\points_100.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\points_500.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\press_start.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\ready.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\retry.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\score_label.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\hud\settings_icon.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\hud</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\barrel_explosion.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\crate_broken.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\crate_damaged.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\door_open.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\finish_flag.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\interactive\lever_on.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\interactive</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\ammo_box.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\bonus_medal.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\grenade.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\health_kit.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\heavy_machinegun.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\items\shotgun.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\items</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\crouch.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\death.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\hit_flash.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\hit.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\idle.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\jump.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\reload.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\run_01.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\run_02.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_crouch.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_horizontal.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\shoot_up.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\player\throw_grenade.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\player</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\Preview.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\barbed_wire.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\crate_dark.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\explosive_barrel.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\lever_off.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\metal_door.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\radio.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\road_sign.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\sandbags.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\warning_light.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\props\wooden_crate.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\props</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\README_ko.md">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\big_mesa.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\dead_tree.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\dry_bush.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\far_mountains.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\guard_tower.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\scenery\small_dune.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\scenery</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-07d41362-651c-44d7-8c94-58c390b27339.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-22df239f-7baa-48c5-a925-89a527df8abf.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-363757ae-2bb3-4c12-9046-dab254a334d8.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-4b5fb751-fb7a-4877-aaf4-859dd77ffd30.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-50cab900-bdc8-4077-8ee0-977ef65b953b.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-7adf858a-57d4-47dc-beca-951aa7812b1b.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-810589ba-b292-4670-accc-ac2de6734efe.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-81da4855-53b6-4e79-95a9-10d84759edf7.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-8bd0d9c1-11bc-4714-b577-3b12923612e1.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-9defc004-1fac-46f6-a74c-a6900e640869.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e000b44c-45fa-4920-b005-d9c427110b4b.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e5b72acc-4671-409f-beac-9689b5a0ce94.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\sheets\exec-e8593a1c-5942-4f8d-84b6-e03137af682b.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\sheets</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_left.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_middle.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\metal_platform_right.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\reinforced_concrete.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\rock_wall.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_fill.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_left.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_right.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sand_top.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\sandstone_brick.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\spike_trap.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+    <None Include="resource\RunAndGun_Desert_Assets\tiles\wooden_bridge.png">
+      <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+  </ItemGroup>
+</Project>

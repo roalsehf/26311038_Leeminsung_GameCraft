@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "frameUnit": "milliseconds",
+  "spriteDirection": "right for player; left for soldiers and tank",
+  "animations": {
+    "player_run": {"frameMs": 110, "loop": true, "frames": ["player/run_01.png", "player/run_02.png"]},
+    "player_jump": {"frameMs": 150, "loop": false, "frames": ["player/jump.png"]},
+    "player_fire": {"frameMs": 100, "loop": false, "frames": ["player/shoot_horizontal.png"]},
+    "player_hurt": {"frameMs": 90, "loop": false, "frames": ["player/hit_flash.png", "player/hit.png"]},
+    "enemy_walk": {"frameMs": 150, "loop": true, "frames": ["enemies/soldier_walk_01.png", "enemies/soldier_walk_02.png"]},
+    "enemy_fire": {"frameMs": 130, "loop": false, "frames": ["enemies/soldier_aim.png", "enemies/soldier_shoot.png"]},
+    "turret_fire": {"frameMs": 150, "loop": false, "frames": ["enemies/turret_idle.png", "enemies/turret_shoot.png"]},
+    "tank_roll": {"frameMs": 150, "loop": true, "frames": ["boss/tank_idle.png", "boss/tank_roll.png"]},
+    "tank_death": {"frameMs": 250, "loop": false, "frames": ["boss/tank_damaged.png", "boss/tank_explosion.png", "boss/tank_wreck.png"]},
+    "crate_break": {"frameMs": 100, "loop": false, "frames": ["props/wooden_crate.png", "interactive/crate_damaged.png", "interactive/crate_broken.png"]},
+    "barrel_explode": {"frameMs": 110, "loop": false, "frames": ["props/explosive_barrel.png", "interactive/barrel_explosion.png"]}
+  },
+  "stageFinish": "interactive/finish_flag.png",
+  "background": "backgrounds/desert_stage_1280x720.png"
+}
