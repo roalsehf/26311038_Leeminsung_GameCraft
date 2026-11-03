@@ -1,0 +1,463 @@
+{
+  "textures": 43,
+  "sounds": 7,
+  "resources": [
+    {
+      "path": "resource/RunAndGun_Desert_Assets/backgrounds/desert_full_wide.png",
+      "bytes": 2606520,
+      "sha256": "3ec522cb1dadf7d4daecac494e09a0aceabd8b0d5359059974f82db953b5518e",
+      "kind": "texture",
+      "key": "Background",
+      "width": 2172,
+      "height": 724
+    },
+    {
+      "path": "resource/player/soldier_actions_v2.png",
+      "bytes": 1268724,
+      "sha256": "3af3d78897b846e1a1f0f1c88e013d6bcf0b12c6234841681c7d147bc99bc04a",
+      "kind": "texture",
+      "key": "PlayerAtlas",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/sand_top.png",
+      "bytes": 10264,
+      "sha256": "27382d0097f1e1763576ba66650c693a5a7cbe9fe99688997f0050af9059ffe4",
+      "kind": "texture",
+      "key": "SandTop",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/sand_fill.png",
+      "bytes": 10577,
+      "sha256": "1346c4dfca926a5fa76ae7b4dfdb29b8c1d7f8bdb2398fa6c70bb26c16fe9f4a",
+      "kind": "texture",
+      "key": "SandFill",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/metal_platform_left.png",
+      "bytes": 6453,
+      "sha256": "b99eab632124422ef32cb03a04468b7904fa6c1d4d6f2a4045754624077af19e",
+      "kind": "texture",
+      "key": "PlatformLeft",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/metal_platform_middle.png",
+      "bytes": 7523,
+      "sha256": "2e0240cbf82c1fdd9a36e6e7d7c0ac9b74981fa55f84070bd0cd9106ee51abee",
+      "kind": "texture",
+      "key": "PlatformMiddle",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/metal_platform_right.png",
+      "bytes": 6372,
+      "sha256": "e2daeeca7657ac80a206ace167c632133d0683624a4675994628500299569616",
+      "kind": "texture",
+      "key": "PlatformRight",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/wooden_crate.png",
+      "bytes": 20566,
+      "sha256": "46491316d232ecd23e1fb540c3035f7d836896f415fb52a75e5ea81a8daf01b9",
+      "kind": "texture",
+      "key": "Crate",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/sandbags.png",
+      "bytes": 15485,
+      "sha256": "021f40e9f76a0b3f34e2a99aa64bac568396f0d2d4bdbc55144a30f4a9216cee",
+      "kind": "texture",
+      "key": "Sandbags",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/explosive_barrel.png",
+      "bytes": 17292,
+      "sha256": "9d8439bc946fb136a397dfe343ffd2a6fd62e82654fac1da788ff164a5680363",
+      "kind": "texture",
+      "key": "Barrel",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/barbed_wire.png",
+      "bytes": 14308,
+      "sha256": "f0908771df8932f46eb9ad83e95401c9f865d8b3e6583b9e7aea200903a5ea57",
+      "kind": "texture",
+      "key": "Wire",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/radio.png",
+      "bytes": 22424,
+      "sha256": "4aa4565b2111104505a73e9736e523e8074065b67707192515cadb3cf2908ad1",
+      "kind": "texture",
+      "key": "Radio",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/road_sign.png",
+      "bytes": 14858,
+      "sha256": "203eb32f02c4cb1aa4be8cb5c629a1eef2925ffe9e7e090d2a90950ff788fe42",
+      "kind": "texture",
+      "key": "RoadSign",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/scenery/guard_tower.png",
+      "bytes": 32412,
+      "sha256": "560729d0b1f7c59b779c5bd48e67292f7ab7cfbe705bd4a750d123824093dcfd",
+      "kind": "texture",
+      "key": "Tower",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/scenery/dead_tree.png",
+      "bytes": 26982,
+      "sha256": "e13721efe4cff7b30582035c05c8ab54d7c33171ec4466ba2a6717c8880cdd08",
+      "kind": "texture",
+      "key": "DeadTree",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/scenery/dry_bush.png",
+      "bytes": 35013,
+      "sha256": "3057b68421333fe29d31462baece23b65a7ae8f65d166f64e927a021613cc3d4",
+      "kind": "texture",
+      "key": "DryBush",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/scenery/big_mesa.png",
+      "bytes": 39794,
+      "sha256": "73103e0ee95dd6ff87313a26fbaa6a387fc6cead64917183b1b1d41f4cf274f6",
+      "kind": "texture",
+      "key": "BigMesa",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/interactive/finish_flag.png",
+      "bytes": 21249,
+      "sha256": "6d9013d16e852630fe33ef4d5135920eb759ff6b1271fb6c227eee3605fdc130",
+      "kind": "texture",
+      "key": "FinishFlag",
+      "width": 160,
+      "height": 144
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/soldier_idle.png",
+      "bytes": 13625,
+      "sha256": "4fb06474d6c16339fc29a8fe0885895f7dcc95afb8ad0723043eb83d84080211",
+      "kind": "texture",
+      "key": "SoldierIdle",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/soldier_walk_01.png",
+      "bytes": 13515,
+      "sha256": "13a2275fbc901194e7a81fcd4260a8f6e767d5472c9bd96356d539a3e674fc91",
+      "kind": "texture",
+      "key": "SoldierWalk1",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/soldier_walk_02.png",
+      "bytes": 13226,
+      "sha256": "02a7c2cbeb0ad08aa6ad9c72106c7781f270062a74da48b5d5c31177d3340554",
+      "kind": "texture",
+      "key": "SoldierWalk2",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/soldier_shoot.png",
+      "bytes": 14487,
+      "sha256": "a6728032ceabe30ac88027e5fa8eb2512515870071f4a461502f51127e7d4941",
+      "kind": "texture",
+      "key": "SoldierShoot",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/soldier_death.png",
+      "bytes": 15620,
+      "sha256": "a7ccbdc6dac3acb04d31fcaa8b80de56b1b8ae30267006af02b93bf2a2181ad1",
+      "kind": "texture",
+      "key": "SoldierDeath",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/turret_idle.png",
+      "bytes": 17457,
+      "sha256": "bc3fa2b07a1bb7087830395df87b647e30604734a10ec0f10943c86e121e5de5",
+      "kind": "texture",
+      "key": "TurretIdle",
+      "width": 144,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/turret_shoot.png",
+      "bytes": 16346,
+      "sha256": "4bee79d1e626d36dad9ae213ef1f4dfb8b9bc8aba67e87657cdf460a54111785",
+      "kind": "texture",
+      "key": "TurretShoot",
+      "width": 144,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/enemies/turret_destroyed.png",
+      "bytes": 21762,
+      "sha256": "3a4770fcb24ffdf40f0e4453685a39e917baa22107c07313114c7ae0d71aff98",
+      "kind": "texture",
+      "key": "TurretDestroyed",
+      "width": 144,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/boss/tank_idle.png",
+      "bytes": 66038,
+      "sha256": "5c89d17180274d59bc9a59001dfeb10127b4b2796455cd7b3b239d4178edbc84",
+      "kind": "texture",
+      "key": "TankIdle",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/boss/tank_shoot.png",
+      "bytes": 69078,
+      "sha256": "fe957ab7b16da9cfe9b172c13a23e4ac2798891136eb84d63d15d269e43bc37e",
+      "kind": "texture",
+      "key": "TankShoot",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/boss/tank_damaged.png",
+      "bytes": 60853,
+      "sha256": "275b0fad147a643506346b575652c1eb38acf79b4c8cf75eb67d0a77a5a9dce9",
+      "kind": "texture",
+      "key": "TankDamaged",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/boss/tank_wreck.png",
+      "bytes": 59139,
+      "sha256": "7b50f70833e03eb5c08212b21ea3620ca9600e24bffc828a7393b13941d3699a",
+      "kind": "texture",
+      "key": "TankWreck",
+      "width": 256,
+      "height": 176
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/bullet.png",
+      "bytes": 2213,
+      "sha256": "39c8d1211e16f66b5d079fddda67ffc0a44a8a84487a61a8a2679354f05c2c14",
+      "kind": "texture",
+      "key": "Bullet",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/tank_shell.png",
+      "bytes": 7205,
+      "sha256": "1286d7d0ed1ec028920176f8987da189addeee72656d3e2694becd7c1147433b",
+      "kind": "texture",
+      "key": "Shell",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/grenade_projectile.png",
+      "bytes": 3478,
+      "sha256": "376e58b49e7975bf10fa6a3f545597d69ee3a63ec74a44d89460ba79b486e4e4",
+      "kind": "texture",
+      "key": "GrenadeProjectile",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/muzzle_flash.png",
+      "bytes": 9981,
+      "sha256": "79d584aa4e5fae147725c8f30a370f3b002a04ccdb2a0311dd342b3b6c97f2a1",
+      "kind": "texture",
+      "key": "Muzzle",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/bullet_impact.png",
+      "bytes": 11166,
+      "sha256": "4328092f321567ea07afbe59b784a93db8e6e6275c08ac1260b488dbf61cbe00",
+      "kind": "texture",
+      "key": "Impact",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/effects/grenade_explosion.png",
+      "bytes": 16765,
+      "sha256": "c96f102720082769cc7fe49cf42fb9a3109652ee725e868acbde84fa5a6c1d27",
+      "kind": "texture",
+      "key": "Explosion",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/items/health_kit.png",
+      "bytes": 12334,
+      "sha256": "643dcac3974b09560ad80aeed76a00a664e1c7f181410570ea8874d5ada0eada",
+      "kind": "texture",
+      "key": "HealthKit",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/items/grenade.png",
+      "bytes": 9209,
+      "sha256": "d1a1fe8e05ac95dbd0c94627acb96b0e690dd694d553355fb6129aad73f243f4",
+      "kind": "texture",
+      "key": "GrenadePickup",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/hud/health_icon.png",
+      "bytes": 4293,
+      "sha256": "8141ed88aa1c71768810ae2ec804ea873a1554be00a2772bedaa5273aeb04c54",
+      "kind": "texture",
+      "key": "HealthIcon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/hud/grenade_icon.png",
+      "bytes": 5921,
+      "sha256": "cf8223fbb924efe0eb991e540252add5ef811de90c595d184746a50ff5787058",
+      "kind": "texture",
+      "key": "GrenadeIcon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/hud/hud_panel.png",
+      "bytes": 1232,
+      "sha256": "a33cbe09e6ac9fa43b025e21122930777a5c4ecb4d3a7457e3ab2d2913ace5b0",
+      "kind": "texture",
+      "key": "HudPanel",
+      "width": 460,
+      "height": 56
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/hud/boss_hp_full.png",
+      "bytes": 394,
+      "sha256": "9dceabaf1a88509f11f0bd06a6eccecdfe4e73fe73f0d59d1835e54116d4da44",
+      "kind": "texture",
+      "key": "BossBar",
+      "width": 320,
+      "height": 24
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/hud/boss_hp_empty.png",
+      "bytes": 396,
+      "sha256": "e307140354c12e6fb3c51bf807fbc84af915441fa98eb688783546b62747e590",
+      "kind": "texture",
+      "key": "BossBarEmpty",
+      "width": 320,
+      "height": 24
+    },
+    {
+      "path": "resource/sound/desert_wind.wav",
+      "bytes": 1058444,
+      "sha256": "ec430bd14de03dfbe82c5cf0c9b15777043d02a09784ac54df5c7844deb8c920",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 24.0,
+      "peakPCM": 14745
+    },
+    {
+      "path": "resource/sound/shot.wav",
+      "bytes": 5776,
+      "sha256": "d2554b74a87fbf732819af4adb76d404477b5973327d117ac72f45cf560b6a04",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 0.13,
+      "peakPCM": 14222
+    },
+    {
+      "path": "resource/sound/explosion.wav",
+      "bytes": 35324,
+      "sha256": "051262ed48275d19ca747aed26dfbc4014523f3bc0ff3083fbbc6bc768101e36",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 0.8,
+      "peakPCM": 28819
+    },
+    {
+      "path": "resource/sound/hurt.wav",
+      "bytes": 11510,
+      "sha256": "ffce43ee508280e79d6f65c53ad8490157e7f875f71f4ec0187025744fbd64aa",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 0.26,
+      "peakPCM": 12177
+    },
+    {
+      "path": "resource/sound/pickup.wav",
+      "bytes": 13274,
+      "sha256": "c29288cc9c01923001702beb5ffded311ef5cbfbc1da897d25e4d672a93991cb",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 0.3,
+      "peakPCM": 7206
+    },
+    {
+      "path": "resource/sound/clear.wav",
+      "bytes": 52964,
+      "sha256": "ead008b4de303a11c8de4d962e1c3f6aafcbe6ef43be53eacae4346826eb4866",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 1.2,
+      "peakPCM": 7863
+    },
+    {
+      "path": "resource/sound/jump.wav",
+      "bytes": 7982,
+      "sha256": "ad5e85501b4e952fe0e4fa450bc9db5b9ce183678fcf436fffe2c6c2e0a74b39",
+      "kind": "sound",
+      "channels": 1,
+      "sampleRate": 22050,
+      "seconds": 0.18,
+      "peakPCM": 4258
+    }
+  ]
+}

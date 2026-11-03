@@ -73,3 +73,11 @@ _ReSharper.Caches/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Local build and verification tools
+/bin/
+/obj/
+/.tools/
+/.codex-backup/
+/dist/
+__pycache__/

@@ -1,35 +1,28 @@
-#include <glc2d.h>
+// link the 2d game library
+#if defined(_DEBUG)
+#if defined(_M_X64) // 64-bit 아키텍처
+#pragma comment(lib, "glc2d_x64_debug.lib")
+#elif defined(_M_IX86) // 32-bit 아키텍처
+#pragma comment(lib, "glc2d_win32_debug.lib")
+#endif
+#else
+#if defined(_M_X64)
+#pragma comment(lib, "glc2d_x64_release.lib")
+#elif defined(_M_IX86)
+#pragma comment(lib, "glc2d_win32_release.lib")
+#endif
+#endif
 
-namespace
-{
-    // 프로젝트 연결 확인용 콜백입니다. 게임 로직은 아직 구현하지 않습니다.
-    int Update()
-    {
-        return 0;
-    }
+// include the 2d game header file
+#include "glc2d.h"
+#include "CApplication.h"
 
-    int Render()
-    {
-        return 0;
-    }
-}
+CApplication g_app;
 
 int main()
 {
-    if (g2_InitSdk() < 0)
-        return 1;
-
-    g2_SetFrameMove(Update);
-    g2_SetRender(Render);
-
-    // 참조 프로젝트와 같은 960 x 600 논리 화면, 창 모드.
-    if (g2_CreateWin(100, 100, 960, 600, "GameCraft - GLC2D", true, 1.0F) < 0)
-    {
-        g2_DestroyWin();
-        return 1;
-    }
-
-    const int result = g2_Run();
-    g2_DestroyWin();
-    return result < 0 ? 1 : 0;
+    g_app.Init();
+    g2_Run();
+    g_app.Destroy();
+    return 0;
 }

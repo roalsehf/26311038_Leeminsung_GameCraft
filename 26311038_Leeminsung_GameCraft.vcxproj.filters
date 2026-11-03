@@ -18,6 +18,98 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameStage.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSession.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CApplication.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlayer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameResources.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CApplication.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStage.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSession.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfig.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePlayer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimation.h"><Filter>헤더 파일</Filter></ClInclude>
+    <ClInclude Include="ProjectileVisual.h"><Filter>헤더 파일</Filter></ClInclude>
+    <ClInclude Include="GameResources.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="리소스 파일\sound">
+      <UniqueIdentifier>{4E68EA45-831B-4833-BD5C-0CF1C659FA6D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="문서">
+      <UniqueIdentifier>{AA125E38-A6CE-4966-85EF-25CEDE29F834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="도구">
+      <UniqueIdentifier>{1316C92B-7E14-4190-AD79-E6B35DAB3754}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\ResourceList.md">
+      <Filter>문서</Filter>
+    </None>
+    <None Include="resource\sound\desert_wind.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\SOURCES.md">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="tools\generate_desert_wind.py">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="tools\generate_effects.py">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="resource\player\soldier_actions_v2.png">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="resource\sound\shot.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\explosion.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\hurt.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\pickup.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\clear.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
+    <None Include="resource\sound\jump.wav">
+      <Filter>리소스 파일\sound</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="리소스 파일\RunAndGun_Desert_Assets">
@@ -462,6 +554,35 @@
     </None>
     <None Include="resource\RunAndGun_Desert_Assets\tiles\wooden_bridge.png">
       <Filter>리소스 파일\RunAndGun_Desert_Assets\tiles</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tools\run_checks.ps1">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="docs\PlayerAnimationSource.md">
+      <Filter>문서</Filter>
+    </None>
+    <None Include="docs\PLAY.md">
+      <Filter>문서</Filter>
+    </None>
+    <None Include="tools\audit_resources.py">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="tests\VisualChecks.cpp">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="tests\GameplayBot.h">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="tests\GameplayTests.cpp">
+      <Filter>도구</Filter>
+    </None>
+    <None Include="docs\ResourceManifest.json">
+      <Filter>문서</Filter>
+    </None>
+    <None Include="tools\package_release.ps1">
+      <Filter>도구</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -144,12 +144,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CApplication.cpp" />
+    <ClCompile Include="GameStage.cpp" />
+    <ClCompile Include="GameSession.cpp" />
+    <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="GamePlayer.cpp" />
+    <ClCompile Include="GameResources.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CApplication.h" />
+    <ClInclude Include="GameStage.h" />
+    <ClInclude Include="GameSession.h" />
+    <ClInclude Include="GameView.h" />
+    <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="GamePlayer.h" />
+    <ClInclude Include="PlayerAnimation.h" />
+    <ClInclude Include="ProjectileVisual.h" />
+    <ClInclude Include="GameResources.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="NuGet.Config" />
     <None Include="README.md" />
+    <None Include="docs\ResourceList.md" />
+    <None Include="resource\sound\desert_wind.wav" />
+    <None Include="resource\sound\SOURCES.md" />
+    <None Include="tools\generate_desert_wind.py" />
+    <None Include="tools\generate_effects.py" />
+    <None Include="resource\player\soldier_actions_v2.png" />
+    <None Include="resource\sound\shot.wav" />
+    <None Include="resource\sound\explosion.wav" />
+    <None Include="resource\sound\hurt.wav" />
+    <None Include="resource\sound\pickup.wav" />
+    <None Include="resource\sound\clear.wav" />
+    <None Include="resource\sound\jump.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resource\RunAndGun_Desert_Assets\animations.json" />
@@ -300,4 +329,15 @@
     </ItemGroup>
     <Copy SourceFiles="@(GameAsset)" DestinationFiles="@(GameAsset-&gt;'$(OutDir)resource\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
+  <ItemGroup>
+    <None Include="tools\run_checks.ps1" />
+    <None Include="docs\PlayerAnimationSource.md" />
+    <None Include="docs\PLAY.md" />
+    <None Include="tools\audit_resources.py" />
+    <None Include="tests\VisualChecks.cpp" />
+    <None Include="tests\GameplayBot.h" />
+    <None Include="tests\GameplayTests.cpp" />
+    <None Include="docs\ResourceManifest.json" />
+    <None Include="tools\package_release.ps1" />
+  </ItemGroup>
 </Project>
