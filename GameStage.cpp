@@ -3,14 +3,41 @@
 #include "GameResources.h"
 #include "glc2d.h"
 #include <algorithm>
+#include <array>
 #include <cmath>
 
 namespace
 {
     constexpr float TileSize = 64.0F;
-    constexpr float FinishX = 4800.0F;
-    constexpr float FirstSectionEnd = 1700.0F;
-    constexpr float SecondSectionEnd = 3400.0F;
+    constexpr float Ground=GameConfig::GroundY;
+    using E=EnemyKind;
+    using S=SupplyKind;
+    const std::array<StageDefinition,StageCount> Stages={{
+        {"사막 진입로","장갑 지휘차",GameConfig::WorldWidth,4800,4880,0xFFFFC47A,
+         {{700,436,256},{1040,352,256},{1600,436,320},{2120,384,384},{2800,436,256},{3150,352,256},{3850,436,384}},
+         {{E::Soldier,640,Ground,2},{E::Soldier,1160,Ground,2},{E::Turret,1510,Ground,5},
+          {E::Soldier,1880,Ground,2},{E::Soldier,2440,Ground,2},{E::Turret,2780,Ground,5},
+          {E::Soldier,3180,Ground,2},{E::Soldier,3640,Ground,2},{E::Turret,3980,Ground,5},{E::Boss,4630,Ground,36}},
+         {{S::Health,1010,Ground},{S::Grenades,2050,Ground},{S::Health,2670,Ground},
+          {S::Grenades,3500,Ground},{S::Health,4200,Ground}}},
+        {"철제 보급기지","기지 공성포",4608,4300,4380,0xFF74DCD7,
+         {{400,424,256},{800,356,256},{1170,410,256},{1650,432,320},{2020,354,256},
+          {2450,426,320},{2980,372,320},{3460,435,320},{3940,420,384}},
+         {{E::Soldier,520,Ground,2},{E::Drone,925,275,3},{E::Turret,1290,410,4},
+          {E::Soldier,1460,Ground,2},{E::Drone,1900,280,3},{E::Soldier,2580,Ground,3},
+          {E::Drone,2750,245,3},{E::Turret,3130,372,5},{E::Soldier,3390,Ground,3},{E::Boss,4090,420,28}},
+         {{S::MachineGun,730,Ground},{S::Health,1540,Ground},{S::Grenades,2180,Ground},
+          {S::Health,2880,Ground},{S::MachineGun,3650,Ground},{S::Health,3800,Ground}}},
+        {"야간 요새","로켓 장갑차",5184,4900,4980,0xFFFFA080,
+         {{450,414,256},{850,356,320},{1260,423,320},{1830,422,320},{2300,355,320},
+          {2760,425,320},{3160,384,256},{3750,423,320},{4250,426,256}},
+         {{E::Soldier,550,Ground,3},{E::Turret,1000,356,5},{E::Drone,1230,280,4},
+          {E::Soldier,1580,Ground,3},{E::Turret,1990,422,5},{E::Soldier,2300,Ground,3},
+          {E::Drone,2830,260,4},{E::Drone,3460,246,4},{E::Soldier,3670,Ground,3},
+          {E::Turret,3910,423,6},{E::Boss,4660,Ground,44}},
+         {{S::MachineGun,690,Ground},{S::Health,1500,Ground},{S::Grenades,2190,Ground},
+          {S::MachineGun,3150,Ground},{S::Health,3530,Ground},{S::Grenades,4150,Ground},{S::Health,4310,Ground}}}
+    }};
 
     struct Decoration
     {
@@ -23,7 +50,7 @@ namespace
         DWORD color = 0xFFFFFFFF;
     };
 
-    // 원본 PNG의 투명 여백을 제외하여 물체의 밑면이 지면에 닿게 그립니다.
+    // 스프라이트 투명 여백 제거
     RECT VisibleRect(GameTexture texture, int textureId)
     {
         switch (texture)
@@ -68,7 +95,7 @@ namespace
             object.width, object.height, object.color);
     }
 
-    // 먼 바위와 감시탑은 지면보다 느리게 움직여 원근감을 만듭니다.
+    // 원경 스크롤
     const Decoration DistantScenery[] =
     {
         { GameTexture::BigMesa, 180, 474, 232, 222, 0.50F, 0xBBD8C2AA },
@@ -84,7 +111,7 @@ namespace
         { GameTexture::Tower, 4280, 508, 214, 217, 0.88F, 0xEEDDD5C1 }
     };
 
-    // 충돌하지 않는 보급품과 기지 소품입니다. 플레이어보다 먼저 그립니다.
+    // 배경 소품
     const Decoration StageObjects[] =
     {
         { GameTexture::DryBush, 50, 521, 86, 35 },
@@ -116,14 +143,46 @@ namespace
         { GameTexture::Radio, 4326, 473, 54, 55 },
         { GameTexture::Barrel, 4430, 520, 65, 54 },
         { GameTexture::Sandbags, 4580, 520, 124, 54 },
-        { GameTexture::FinishFlag, FinishX, 520, 122, 120 },
         { GameTexture::DryBush, 5000, 521, 104, 42 }
+    };
+
+    const Decoration DepotObjects[]=
+    {
+        {GameTexture::Wire,75,520,156,74}, {GameTexture::WarningLight,303,520,32,46},
+        {GameTexture::Crate,535,424,96,51}, {GameTexture::Barrel,642,520,52,60},
+        {GameTexture::Crate,884,356,92,48}, {GameTexture::Barrel,1030,520,54,60},
+        {GameTexture::Radio,1190,410,52,52}, {GameTexture::Crate,1350,520,92,52},
+        {GameTexture::Wire,1550,520,170,95}, {GameTexture::Crate,1770,432,94,47},
+        {GameTexture::WarningLight,2002,520,34,43}, {GameTexture::Barrel,2200,354,56,61},
+        {GameTexture::Sandbags,2320,520,125,50}, {GameTexture::Crate,2510,426,94,51},
+        {GameTexture::Barrel,2640,520,52,60}, {GameTexture::Radio,3020,372,59,56},
+        {GameTexture::Crate,3190,520,114,60}, {GameTexture::Wire,3370,520,134,89},
+        {GameTexture::Barrel,3510,435,55,60}, {GameTexture::WarningLight,3870,520,40,53},
+        {GameTexture::Crate,3990,520,90,48}, {GameTexture::Sandbags,4205,520,104,45}
+    };
+    const Decoration FortressObjects[]=
+    {
+        {GameTexture::RockWall,0,520,150,160,1,0xFF8790AA},{GameTexture::WarningLight,340,520,33,44},
+        {GameTexture::Sandbags,510,414,115,52},{GameTexture::Wire,730,520,152,100},
+        {GameTexture::Crate,955,356,78,47},{GameTexture::Tower,1050,490,150,200,0.87F,0xAA8C9CBC},
+        {GameTexture::Barrel,1170,520,50,63},{GameTexture::Radio,1360,423,59,55},
+        {GameTexture::Wire,1630,520,164,82},{GameTexture::Crate,1840,520,91,49},
+        {GameTexture::Sandbags,1970,422,133,52},{GameTexture::WarningLight,2180,520,37,44},
+        {GameTexture::Tower,2300,490,175,212,0.87F,0xAA8C9CBC},{GameTexture::Barrel,2470,355,50,55},
+        {GameTexture::Crate,2715,520,94,46},{GameTexture::Wire,2920,520,165,91},
+        {GameTexture::WarningLight,3250,384,36,45},{GameTexture::Sandbags,3340,520,117,45},
+        {GameTexture::Tower,3620,490,172,208,0.88F,0xAA8C9CBC},{GameTexture::Radio,3800,423,60,62},
+        {GameTexture::Crate,3955,520,96,51},{GameTexture::Barrel,4100,520,56,65},
+        {GameTexture::Wire,4290,520,153,92},{GameTexture::WarningLight,4510,520,37,46},
+        {GameTexture::Sandbags,4760,520,106,49}
     };
 }
 
+const StageDefinition& GameStage::Data() const { return Stages[static_cast<std::size_t>(m_id)]; }
+
 void GameStage::Update(float deltaSeconds, float playerX)
 {
-    const float maxCamera = GameConfig::WorldWidth - GameConfig::ScreenWidth;
+    const float maxCamera = Data().width - GameConfig::ScreenWidth;
     const float target = std::clamp(playerX - GameConfig::ScreenWidth * 0.40F,
         0.0F, maxCamera);
     const float blend = 1.0F - std::exp(-9.0F * (std::max)(0.0F, deltaSeconds));
@@ -135,22 +194,27 @@ void GameStage::Update(float deltaSeconds, float playerX)
 
 void GameStage::RenderBackdrop(const GameResources& resources) const
 {
-    const int panorama = resources.Texture(GameTexture::Background);
+    const bool desert=m_id==StageId::Desert;
+    const bool night=m_id==StageId::Fortress;
+    const int panorama = resources.Texture(desert?GameTexture::Background:GameTexture::CampaignBackgrounds);
     const float panoramaWidth = static_cast<float>(g2_TextureWidth(panorama));
-    const float panoramaHeight = static_cast<float>(g2_TextureHeight(panorama));
+    const int fullHeight=g2_TextureHeight(panorama);
+    const int half=fullHeight/2;
+    const RECT panoramaSource{0,night?half:0,static_cast<LONG>(panoramaWidth),desert||night?fullHeight:half};
+    const float panoramaHeight=static_cast<float>(panoramaSource.bottom-panoramaSource.top);
     const float scale = (std::max)(GameConfig::ScreenHeight / panoramaHeight,
         GameConfig::ScreenWidth / panoramaWidth);
-    const float cameraRange = GameConfig::WorldWidth - GameConfig::ScreenWidth;
+    const float cameraRange = Data().width - GameConfig::ScreenWidth;
     const float panoramaRange = panoramaWidth * scale - GameConfig::ScreenWidth;
     const float panoramaX = -panoramaRange * m_cameraX / cameraRange;
     const VEC2 backgroundPosition(panoramaX, 0.0F);
     const VEC2 backgroundScale(scale, scale);
-    g2_Draw2D(panorama, nullptr, &backgroundPosition, &backgroundScale);
+    g2_Draw2D(panorama, &panoramaSource, &backgroundPosition, &backgroundScale);
 
-    for (const Decoration& object : DistantScenery)
+    if(desert) for (const Decoration& object : DistantScenery)
         DrawDecoration(resources, object, m_cameraX);
 
-    // 밑흙을 먼저 채워 PNG의 투명한 가장자리에 배경 틈이 생기지 않게 합니다.
+    // 지면 틈 채우기
     const RECT groundSource = { 0, 0, 64, 63 };
     const int firstTile = static_cast<int>(std::floor(m_cameraX / TileSize));
     const int lastTile = static_cast<int>(std::ceil(
@@ -158,6 +222,13 @@ void GameStage::RenderBackdrop(const GameResources& resources) const
     for (int tile = firstTile; tile < lastTile; ++tile)
     {
         const float x = tile * TileSize - m_cameraX;
+        if(!desert)
+        {
+            const DWORD tint=night?0xFF9DAAC5:0xFFC0C7C8;
+            DrawPart(resources, GameTexture::Concrete,groundSource,x,Ground,TileSize,80,tint);
+            DrawPart(resources, GameTexture::PlatformMiddle,RECT{0,0,64,22},x,Ground,TileSize,17,tint);
+            continue;
+        }
         DrawPart(resources, GameTexture::SandFill, groundSource, x,
             GameConfig::GroundY, TileSize, GameConfig::ScreenHeight - GameConfig::GroundY);
         DrawPart(resources, GameTexture::SandTop, groundSource, x,
@@ -165,7 +236,7 @@ void GameStage::RenderBackdrop(const GameResources& resources) const
     }
 
     const RECT platformSource = { 0, 0, 64, 64 };
-    for (const StagePlatform& platform : m_platforms)
+    for (const StagePlatform& platform : Platforms())
     {
         const int tileCount = static_cast<int>(platform.width / TileSize);
         for (int tile = 0; tile < tileCount; ++tile)
@@ -174,17 +245,20 @@ void GameStage::RenderBackdrop(const GameResources& resources) const
                 : (tile == tileCount - 1 ? GameTexture::PlatformRight : GameTexture::PlatformMiddle);
             DrawPart(resources, texture, platformSource,
                 platform.left + tile * TileSize - m_cameraX, platform.top,
-                TileSize, 32.0F);
+                TileSize, 32.0F,night?0xFFA4B1D1:0xFFFFFFFF);
         }
     }
 
-    for (const Decoration& object : StageObjects)
-        DrawDecoration(resources, object, m_cameraX);
+    if(desert) for(const auto& object:StageObjects) DrawDecoration(resources,object,m_cameraX);
+    else if(night) for(const auto& object:FortressObjects) DrawDecoration(resources,object,m_cameraX);
+    else for(const auto& object:DepotObjects) DrawDecoration(resources,object,m_cameraX);
+    DrawDecoration(resources,{GameTexture::FinishFlag,Data().goal-52,Ground,112,114},m_cameraX);
 }
 
 void GameStage::RenderForeground(const GameResources& resources) const
 {
-    // 작은 풀만 지면 가장자리에 덧그려 캐릭터의 상체와 진행 방향을 가리지 않습니다.
+    if(m_id!=StageId::Desert) return;
+    // 지면 앞쪽 풀
     const Decoration edgeBushes[] =
     {
         { GameTexture::DryBush, 12, 546, 91, 25, 1.0F, 0xEEC9BA98 },
@@ -199,7 +273,7 @@ void GameStage::RenderForeground(const GameResources& resources) const
 
 const std::vector<StagePlatform>& GameStage::Platforms() const
 {
-    return m_platforms;
+    return Data().platforms;
 }
 
 float GameStage::CameraX() const
@@ -209,14 +283,5 @@ float GameStage::CameraX() const
 
 bool GameStage::AtEnd(float playerX) const
 {
-    return playerX >= FinishX + 80.0F;
-}
-
-const char* GameStage::SectionName(float playerX) const
-{
-    if (playerX < FirstSectionEnd)
-        return "DESERT APPROACH";
-    if (playerX < SecondSectionEnd)
-        return "SUPPLY OUTPOST";
-    return "COMMUNICATION BASE";
+    return playerX >= Data().goal;
 }

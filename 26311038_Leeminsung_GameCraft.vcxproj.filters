@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Manifest Include="GameCraft.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameSessionCombat.cpp"><Filter>소스 파일</Filter></ClCompile>
+    <ClInclude Include="GameCombat.h"><Filter>헤더 파일</Filter></ClInclude>
     <Filter Include="소스 파일">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -80,6 +85,8 @@
     <None Include="resource\sound\desert_wind.wav">
       <Filter>리소스 파일\sound</Filter>
     </None>
+    <None Include="resource\sound\negev_desert_loop.wav"><Filter>리소스 파일\sound</Filter></None>
+    <None Include="resource\sound\negev_fight_loop.wav"><Filter>리소스 파일\sound</Filter></None>
     <None Include="resource\sound\SOURCES.md">
       <Filter>리소스 파일\sound</Filter>
     </None>
@@ -563,6 +570,10 @@
     <None Include="docs\PlayerAnimationSource.md">
       <Filter>문서</Filter>
     </None>
+    <None Include="docs\CampaignArt.md"><Filter>문서</Filter></None>
+    <None Include="resource\campaign\vertical_aim.png"><Filter>리소스 파일</Filter></None>
+    <None Include="resource\campaign\depot_fortress.png"><Filter>리소스 파일</Filter></None>
+    <None Include="resource\campaign\machines.png"><Filter>리소스 파일</Filter></None>
     <None Include="docs\PLAY.md">
       <Filter>문서</Filter>
     </None>

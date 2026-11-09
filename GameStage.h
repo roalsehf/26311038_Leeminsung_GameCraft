@@ -1,8 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <cstdint>
 
 class GameResources;
+
+enum class StageId { Desert, Depot, Fortress };
+enum class EnemyKind { Soldier, Turret, Drone, Boss };
+enum class SupplyKind { Health, Grenades, MachineGun };
+inline constexpr int StageCount=3;
 
 struct StagePlatform
 {
@@ -11,10 +17,24 @@ struct StagePlatform
     float width;
 };
 
-// 한 스테이지의 발판, 장식과 횡스크롤 카메라를 관리합니다.
+struct EnemySpawn { EnemyKind kind; float x, feet; int hp; };
+struct SupplySpawn { SupplyKind kind; float x, feet; };
+struct StageDefinition
+{
+    const char* name;
+    const char* bossName;
+    float width, gate, goal;
+    std::uint32_t accent;
+    std::vector<StagePlatform> platforms;
+    std::vector<EnemySpawn> enemies;
+    std::vector<SupplySpawn> supplies;
+};
+
+// 스테이지와 카메라
 class GameStage
 {
 public:
+    explicit GameStage(StageId id=StageId::Desert) : m_id(id) {}
     void Update(float deltaSeconds, float playerX);
     void RenderBackdrop(const GameResources& resources) const;
     void RenderForeground(const GameResources& resources) const;
@@ -22,18 +42,10 @@ public:
     const std::vector<StagePlatform>& Platforms() const;
     float CameraX() const;
     bool AtEnd(float playerX) const;
-    const char* SectionName(float playerX) const;
+    const StageDefinition& Data() const;
+    StageId Id() const { return m_id; }
 
 private:
+    StageId m_id;
     float m_cameraX = 0.0F;
-    std::vector<StagePlatform> m_platforms =
-    {
-        { 700.0F, 436.0F, 256.0F },
-        { 1040.0F, 352.0F, 256.0F },
-        { 1600.0F, 436.0F, 320.0F },
-        { 2120.0F, 384.0F, 384.0F },
-        { 2800.0F, 436.0F, 256.0F },
-        { 3150.0F, 352.0F, 256.0F },
-        { 3850.0F, 436.0F, 384.0F }
-    };
 };

@@ -1,8 +1,8 @@
-// link the 2d game library
+// GLC2D 연결
 #if defined(_DEBUG)
-#if defined(_M_X64) // 64-bit 아키텍처
+#if defined(_M_X64)
 #pragma comment(lib, "glc2d_x64_debug.lib")
-#elif defined(_M_IX86) // 32-bit 아키텍처
+#elif defined(_M_IX86)
 #pragma comment(lib, "glc2d_win32_debug.lib")
 #endif
 #else
@@ -13,7 +13,7 @@
 #endif
 #endif
 
-// include the 2d game header file
+// 게임 헤더
 #include "glc2d.h"
 #include "CApplication.h"
 

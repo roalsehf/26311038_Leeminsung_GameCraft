@@ -6,6 +6,14 @@ namespace
     constexpr std::array<const char*, static_cast<std::size_t>(GameTexture::Count)> TexturePaths =
     {
         "resource/RunAndGun_Desert_Assets/backgrounds/desert_full_wide.png",
+        "resource/campaign/depot_fortress.png",
+        "resource/campaign/machines.png",
+        "resource/campaign/vertical_aim.png",
+        "resource/RunAndGun_Desert_Assets/tiles/reinforced_concrete.png",
+        "resource/RunAndGun_Desert_Assets/tiles/rock_wall.png",
+        "resource/RunAndGun_Desert_Assets/props/warning_light.png",
+        "resource/RunAndGun_Desert_Assets/props/metal_door.png",
+        "resource/RunAndGun_Desert_Assets/items/heavy_machinegun.png",
         "resource/player/soldier_actions_v2.png",
         "resource/RunAndGun_Desert_Assets/tiles/sand_top.png",
         "resource/RunAndGun_Desert_Assets/tiles/sand_fill.png",
@@ -41,6 +49,7 @@ namespace
         "resource/RunAndGun_Desert_Assets/effects/muzzle_flash.png",
         "resource/RunAndGun_Desert_Assets/effects/bullet_impact.png",
         "resource/RunAndGun_Desert_Assets/effects/grenade_explosion.png",
+        "resource/RunAndGun_Desert_Assets/effects/sand_dust.png",
         "resource/RunAndGun_Desert_Assets/items/health_kit.png",
         "resource/RunAndGun_Desert_Assets/items/grenade.png",
         "resource/RunAndGun_Desert_Assets/hud/health_icon.png",
@@ -49,7 +58,8 @@ namespace
         "resource/RunAndGun_Desert_Assets/hud/boss_hp_full.png",
         "resource/RunAndGun_Desert_Assets/hud/boss_hp_empty.png"
     };
-    constexpr const char* BackgroundSoundPath = "resource/sound/desert_wind.wav";
+    constexpr std::array<const char*, static_cast<std::size_t>(GameMusic::Count)> MusicPaths =
+    { nullptr, "resource/sound/negev_desert_loop.wav", "resource/sound/negev_fight_loop.wav" };
     constexpr std::array<const char*, static_cast<std::size_t>(GameSound::Count)> SoundPaths =
     { "resource/sound/shot.wav", "resource/sound/explosion.wav", "resource/sound/hurt.wav",
       "resource/sound/pickup.wav", "resource/sound/clear.wav", "resource/sound/jump.wav" };
@@ -58,6 +68,7 @@ namespace
 GameResources::GameResources()
 {
     m_textures.fill(-1);
+    m_music.fill(-1);
     m_sounds.fill(-1);
 }
 
@@ -76,12 +87,10 @@ bool GameResources::Load(const char*& failedPath)
         }
     }
 
-    m_backgroundSound = g2_SoundLoad(BackgroundSoundPath);
-    if (m_backgroundSound < 0)
+    for (std::size_t index=1; index<MusicPaths.size(); ++index)
     {
-        failedPath = BackgroundSoundPath;
-        Unload();
-        return false;
+        m_music[index]=g2_SoundLoad(MusicPaths[index]);
+        if (m_music[index]<0) { failedPath=MusicPaths[index]; Unload(); return false; }
     }
     for (std::size_t index=0; index<SoundPaths.size(); ++index)
     {
@@ -91,28 +100,40 @@ bool GameResources::Load(const char*& failedPath)
     return true;
 }
 
-bool GameResources::PlayBackgroundSound()
+bool GameResources::SetMusic(GameMusic track)
 {
-    if (m_backgroundSound < 0)
-        return false;
+    if (m_currentMusic==track) return true;
 
-    g2_SoundPlay(m_backgroundSound, true);
-    return g2_SoundIsPlaying(m_backgroundSound);
+    const int previous=m_music[static_cast<std::size_t>(m_currentMusic)];
+    if (previous>=0)
+    {
+        g2_SoundStop(previous);
+        if (g2_SoundIsPlaying(previous)) return false;
+    }
+    m_currentMusic=track;
+
+    if (track==GameMusic::Silence) return true;
+    const int next=m_music[static_cast<std::size_t>(track)];
+    if (next<0) return false;
+    g2_SoundReset(next);
+    g2_SoundPlay(next,true);
+    return g2_SoundIsPlaying(next);
 }
 
 void GameResources::Unload()
 {
+    SetMusic(GameMusic::Silence);
     for(int& sound:m_sounds)
     {
         if(sound>=0) { g2_SoundStop(sound); g2_SoundRelease(sound); }
         sound=-1;
     }
-    if (m_backgroundSound >= 0)
+    for (int& music:m_music)
     {
-        g2_SoundStop(m_backgroundSound);
-        g2_SoundRelease(m_backgroundSound);
-        m_backgroundSound = -1;
+        if (music>=0) g2_SoundRelease(music);
+        music=-1;
     }
+    m_currentMusic=GameMusic::Silence;
     for (int& texture : m_textures)
     {
         if (texture >= 0)

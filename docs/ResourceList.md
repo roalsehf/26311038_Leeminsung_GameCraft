@@ -1,56 +1,38 @@
-# 4차 구현 및 리소스 목록
+# 3스테이지 캠페인 리소스 목록
 
-## 한 판 구현
+## 스테이지와 전투
 
-시작 화면에서 Enter로 출발하여 사막 진입로, 보급소, 통신기지를 진행합니다.
-병사 6명, 포탑 3개, 마지막 장갑 보스 1개가 등장합니다. 보스를 처치하고 마지막 깃발을 통과하면 클리어입니다.
-이동, 점프, 앉기, 사격, 수류탄, 충돌, 체력, 피격 무적, 보급품, 점수, 일시정지, 게임 오버, 재시작을 포함합니다.
-화면은 기존 960 x 600, 월드는 가로 5120픽셀입니다. CApplication 전역 객체와 main 호출 순서를 유지했습니다.
+- 사막 진입로: 제공받은 사막 파노라마와 모래 지형, 장갑 지휘차.
+- 철제 보급기지: 석양 화물기지 배경, 콘크리트 바닥·고가 발판, 드론과 공성포.
+- 야간 요새: 달빛 요새 배경, 콘크리트와 암벽, 드론과 로켓 장갑차.
 
-## 이미지 분류
+스테이지 배치, 보급품, 적, 클리어 위치는 `GameStage.cpp`의 스테이지 데이터에서 관리합니다. `GameSession.cpp`는 입력과 스테이지 상태를 받아 게임을 초당 120회 갱신합니다. `GameSessionCombat.cpp`는 적의 발사 계획과 피해 판정을 처리하며, 충돌 계산은 `GameCombat.h`에 있습니다. `GameView.cpp`는 월드, HUD, 메뉴를 그립니다. 보스의 경고 표시와 발사는 같은 탄환 계획을 사용합니다.
 
-기준 경로는 resource/RunAndGun_Desert_Assets/입니다. 출처는 사용자가 제공한 RunAndGun_Desert_Assets.zip이며, 원본 133개 파일을 수정하지 않고 보관했습니다.
+## 이미지
 
-| 폴더 | 현재 사용 |
+RunAndGun_Desert_Assets.zip의 원본 리소스는 resource/RunAndGun_Desert_Assets/에 보관합니다. 배경·지형·소품·병사·기본 포탑·장갑차·효과·보급품·HUD에서 필요한 이미지를 로드합니다. 달리기와 착지에는 원본 `sand_dust.png`를 사용합니다.
+
+| 파일 | 용도 |
 | --- | --- |
-| backgrounds | desert_full_wide.png의 시차 스크롤 |
-| player | 원본 동작 이미지 보관. 실제 플레이어는 별도 통합 시트 사용 |
-| enemies | 병사 이동·사격·사망, 포탑 대기·사격·잔해 |
-| boss | 대기·사격·피격·잔해 |
-| tiles | 모래 지면, 철제 발판 좌·중·우 |
-| props / scenery | 상자, 드럼통, 철조망, 무전기, 나무, 감시탑 등 |
-| interactive | 마지막 깃발 |
-| effects | 총알, 포탄, 수류탄, 발사·피격·폭발 표현 |
-| items | 회복팩, 수류탄 보급 |
-| hud | 초상화, 체력·수류탄 아이콘, 패널, 보스 체력바 |
-| sheets | 제공 원본 아틀라스 보관용. 실행 패키지에서 제외 |
+| resource/player/soldier_actions_v2.png | 동일 병사의 대기·8프레임 이동·정면 사격·앉기·점프·투척·사망 |
+| resource/campaign/vertical_aim.png | 동일 병사의 위 조준 3종과 공중 아래 조준, 1254 × 1254 RGBA |
+| resource/campaign/depot_fortress.png | 보급기지와 야간 요새의 파노라마, 1536 × 1024 RGB |
+| resource/campaign/machines.png | 드론 2자세, 고가 공성포와 로켓 장갑차, 1254 × 1254 RGBA |
 
-## 보강 리소스
+보강 이미지는 내장 image_gen으로 제작했습니다. 신규 이미지의 프롬프트와 출처는 docs/CampaignArt.md, 기존 통합 캐릭터는 docs/PlayerAnimationSource.md에 기록했습니다. 위·아래 탄환 및 섬광은 게임 코드에서 비행 벡터에 맞춰 그립니다.
 
-| 파일 | 출처·규격·용도 |
-| --- | --- |
-| resource/player/soldier_actions_v2.png | 내장 image_gen으로 원본 캐릭터 참고, 1254 x 1254 RGBA, 4 x 4 셀, 모든 플레이어 자세 통일, 달리기 8프레임 75ms 간격 |
-| resource/sound/desert_wind.wav | 직접 합성, 24초, 22050Hz PCM16 모노, 반복 배경음 |
-| resource/sound/shot.wav | 직접 합성, 약 0.13초, 사격 |
-| resource/sound/explosion.wav | 직접 합성, 0.8초, 폭발 |
-| resource/sound/hurt.wav | 직접 합성, 0.26초, 피격 |
-| resource/sound/pickup.wav | 직접 합성, 0.3초, 보급품 획득 |
-| resource/sound/clear.wav | 직접 합성, 1.2초, 클리어 |
-| resource/sound/jump.wav | 직접 합성, 0.18초, 점프 |
+## 사운드
 
-외부 음원을 가져오지 않았습니다. 생성 코드는 tools/generate_desert_wind.py와 tools/generate_effects.py입니다.
-이미지 생성 프롬프트·참조·규격은 docs/PlayerAnimationSource.md에 기록했습니다.
-사용자 제공 이미지의 이용 조건을 새로 지정하지 않았으며 원본 안내 문서를 보관합니다.
+| 사용 구간 | 원본 | 재생용 파일 |
+| --- | --- | --- |
+| 세 스테이지의 일반 구간 | 사용자가 제공한 Negev Desert Loop.wav | resource/sound/negev_desert_loop.wav |
+| 각 스테이지의 보스 교전 | 사용자가 제공한 Negev Fight Loop.wav | resource/sound/negev_fight_loop.wav |
 
-## 실제 로드 목록과 배포
+두 BGM은 44.1 kHz PCM16 스테레오 WAV입니다. 원본은 보존하고, 재생용 복사본은 효과음과 균형을 맞춰 음량을 조정했습니다. 반복 경계의 클릭을 줄이기 위해 처음과 끝 4ms만 페이드 처리했으며, 재생 길이는 그대로입니다.
+사격·폭발·피격·보급품·클리어·점프 효과음은 기존 PCM16 모노 WAV를 사용합니다. 이전 사막 바람 반복음은 보관용으로 남깁니다.
 
-GameResources.h와 GameResources.cpp에서 텍스처·사운드 경로와 핸들을 관리합니다.
-초기화 시 한 번 로드하고, 종료 시 재생을 멈춘 뒤 해제합니다. PNG는 실제 알파 채널을 사용합니다.
-로드 실패 시 누락된 경로를 콘솔에 표시합니다.
+## 배포
 
-docs/ResourceManifest.json은 실제 C++ 로드 경로에 따른 목록입니다. 이미지 크기·SHA256과 사운드 형식·길이·피크·SHA256을 포함합니다.
-tools/audit_resources.py로 파일 누락, enum 개수, PNG 헤더, PCM16 형식, 클리핑을 검사하고 목록을 갱신합니다.
+GameResources의 실제 로드 경로를 기준으로 tools/audit_resources.py가 docs/ResourceManifest.json을 생성합니다. 파일 존재, 이미지 헤더, WAV 형식과 SHA256을 검사합니다.
 
-tools/package_release.ps1은 Release / x64를 빌드하고 실제 사용하는 이미지·사운드, EXE, DirectX DLL, 실행 안내를 dist/GameCraft-f4.zip으로 묶습니다.
-보관용 원본 아틀라스와 중간 파일은 실행 패키지에서 제외합니다. 기존 README 기획서는 수정하지 않았습니다.
-
+tools/package_release.ps1은 Release / x64를 빌드하고 실제 사용하는 이미지·사운드, EXE, DirectX DLL, 실행 안내를 dist/GameCraft-3Stages.zip에 담습니다. 미사용 원본과 빌드 중간 파일은 ZIP에 포함하지 않습니다.

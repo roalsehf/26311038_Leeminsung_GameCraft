@@ -15,11 +15,21 @@ namespace
     constexpr float RunFrameCount = 8.0F;
 }
 
-void GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
-    bool jumpPressed, const std::vector<StagePlatform>& platforms)
+bool GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
+    bool jumpPressed, const std::vector<StagePlatform>& platforms,float worldWidth,bool dropThrough,float rightLimit)
 {
     if (deltaSeconds <= 0.0F)
-        return;
+        return false;
+    bool jumped=false;
+    if(dropThrough && m_grounded && m_y<GameConfig::GroundY-1)
+    {
+        // 발판 내려가기
+        m_y+=2;
+        m_verticalSpeed=35;
+        m_grounded=false;
+        m_coyoteTime=m_jumpBuffer=0;
+        jumpPressed=false;
+    }
 
     m_jumpBuffer = jumpPressed ? JumpGraceSeconds
         : (std::max)(0.0F, m_jumpBuffer - deltaSeconds);
@@ -28,21 +38,23 @@ void GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
 
     if (m_jumpBuffer > 0.0F && m_coyoteTime > 0.0F)
     {
+        jumped=true;
         m_verticalSpeed = -JumpSpeed;
         m_grounded = false;
         m_coyoteTime = 0.0F;
         m_jumpBuffer = 0.0F;
     }
 
-    // A와 D를 함께 누르면 이동하지 않습니다.
+    // 플레이어 이동
     const int direction = static_cast<int>(moveRight) - static_cast<int>(moveLeft);
     if (direction != 0)
         m_facingLeft = direction < 0;
 
     const float previousX = m_x;
     const float halfWidth = GameConfig::PlayerWidth * 0.5F;
-    m_x = std::clamp(m_x + direction * GameConfig::MoveSpeed * deltaSeconds,
-        halfWidth, GameConfig::WorldWidth - halfWidth);
+    const float worldEdge=worldWidth-halfWidth;
+    const float edge=rightLimit>0?(std::min)(worldEdge,rightLimit):worldEdge;
+    m_x = std::clamp(m_x + direction * GameConfig::MoveSpeed * deltaSeconds,halfWidth,edge);
     m_moving = m_x != previousX;
 
     const float previousFeet = m_y;
@@ -51,7 +63,7 @@ void GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
     m_verticalSpeed += Gravity * deltaSeconds;
     m_grounded = false;
 
-    // 발판은 아래에서 통과하며, 내려올 때 발이 윗면을 지나는 경우에만 착지합니다.
+    // 발판 착지
     if (m_verticalSpeed >= 0.0F)
     {
         float landingY = GameConfig::GroundY;
@@ -71,9 +83,10 @@ void GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
             m_verticalSpeed = 0.0F;
             m_grounded = true;
 
-            // 착지 직전에 눌렀던 점프도 한 번 받아 주되, 길게 눌러 연속 점프하지 않습니다.
+            // 착지 직전 점프 입력
             if (m_jumpBuffer > 0.0F)
             {
+                jumped=true;
                 m_verticalSpeed = -JumpSpeed;
                 m_grounded = false;
                 m_jumpBuffer = 0.0F;
@@ -88,6 +101,7 @@ void GamePlayer::Update(float deltaSeconds, bool moveLeft, bool moveRight,
             GameConfig::RunFrameSeconds * RunFrameCount);
     else
         m_runTime = 0.0F;
+    return jumped;
 }
 
 int GamePlayer::RunFrame() const
@@ -95,24 +109,21 @@ int GamePlayer::RunFrame() const
     return static_cast<int>(m_runTime/GameConfig::RunFrameSeconds)%8;
 }
 
-void GamePlayer::Render(const GameResources& resources,float cameraX,int atlasFrame) const
+void GamePlayer::Render(const GameResources& resources,float cameraX,const PlayerArt::FrameSpec& frame,std::uint32_t color) const
 {
-    atlasFrame=std::clamp(atlasFrame,0,15);
-    const int texture=resources.Texture(GameTexture::PlayerAtlas);
+    const int texture=resources.Texture(frame.Vertical()?GameTexture::VerticalAim:GameTexture::PlayerAtlas);
     const int width=g2_TextureWidth(texture),height=g2_TextureHeight(texture);
-    const int column=atlasFrame%4,row=atlasFrame/4;
-    RECT source{column*width/4,row*height/4,(column+1)*width/4,(row+1)*height/4};
+    const int column=frame.index%frame.grid,row=frame.index/frame.grid;
+    RECT source{column*width/frame.grid,row*height/frame.grid,(column+1)*width/frame.grid,(row+1)*height/frame.grid};
     const float canvasWidth=static_cast<float>(source.right-source.left);
     const float sourceRatio=height/PlayerArt::SourceSize;
-    const float ratio=GameConfig::PlayerHeight/(PlayerArt::StandingHeight*sourceRatio);
-    // 투척 그림에 그려진 공중 수류탄은 제외하고 실제 월드 투사체만 표시합니다.
-    if(atlasFrame==3) source.right=source.left+static_cast<LONG>(249*sourceRatio);
+    const float ratio=frame.Scale()/sourceRatio;
+    // 그림 속 수류탄 제외
+    if(!frame.Vertical() && frame.index==3) source.right=source.left+static_cast<LONG>(249*sourceRatio);
     const float sourceWidth=static_cast<float>(source.right-source.left);
     const float left=m_facingLeft?canvasWidth*0.5F-sourceWidth:-canvasWidth*0.5F;
     const VEC2 position(m_x-cameraX+left*ratio,
-        m_y-PlayerArt::FeetY[atlasFrame]*sourceRatio*ratio);
+        m_y-frame.feet*sourceRatio*ratio);
     const VEC2 scale(m_facingLeft?-ratio:ratio,ratio);
-    g2_Draw2D(texture,&source,&position,&scale);
+    g2_Draw2D(texture,&source,&position,&scale,nullptr,0,color);
 }
-
-void GamePlayer::RestrictX(float left,float right) { m_x=std::clamp(m_x,left,right); }

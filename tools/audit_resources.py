@@ -1,4 +1,4 @@
-"""Audit actual C++ resource paths and write a manifest. Standard library only."""
+"""리소스 검사 및 목록 생성."""
 from pathlib import Path
 import array, hashlib, json, re, struct, wave
 ROOT=Path(__file__).resolve().parents[1]

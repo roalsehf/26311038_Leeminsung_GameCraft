@@ -4,6 +4,8 @@
 #include "GameResources.h"
 #include "GameStage.h"
 #include "GameSession.h"
+#include "GameView.h"
+#include <chrono>
 
 class CApplication
 {
@@ -20,10 +22,8 @@ private:
 
     GameResources m_resources;
     GameSession m_session;
-    int m_font = -1;
-    int m_titleFont = -1;
-    int m_largeFont = -1;
-    long long m_lastUpdateTime = 0;
+    GameFonts m_fonts;
+    std::chrono::steady_clock::time_point m_lastUpdateTime;
     bool m_sdkInitialized = false;
 };
 

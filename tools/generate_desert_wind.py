@@ -1,4 +1,4 @@
-"""Generate an original, seamless desert-wind loop using only the standard library."""
+"""사막 바람 생성."""
 
 from array import array
 import json
@@ -16,14 +16,13 @@ OUTPUT = Path(__file__).resolve().parents[1] / "resource" / "sound" / "desert_wi
 
 
 def circular_lowpass(samples, cutoff_hz):
-    """Start the filter in the steady state of an endlessly repeated noise buffer."""
+    """반복 구간 저역 필터."""
     retention = math.exp(-2.0 * math.pi * cutoff_hz / SAMPLE_RATE)
     contribution = 1.0 - retention
     state = 0.0
     for sample in samples:
         state = retention * state + contribution * sample
-    # Solve the recurrence's periodic boundary condition. For this long buffer,
-    # retention ** len(samples) is effectively zero, but retain the exact formula.
+    # 반복 경계 초기값
     state /= 1.0 - retention ** len(samples)
     filtered = array("d")
     for sample in samples:
@@ -43,7 +42,7 @@ def generate():
     low = circular_lowpass(noise, 85.0)
     medium = circular_lowpass(noise, 650.0)
     high = circular_lowpass(noise, 2400.0)
-    # Remove DC and the very lowest frequencies to avoid speaker rumble.
+    # 초저역 제거
     sub = circular_lowpass(noise, 18.0)
     low_band = array("d", (a - b for a, b in zip(low, sub)))
     mid_band = array("d", (a - b for a, b in zip(medium, low)))
@@ -54,8 +53,7 @@ def generate():
     samples = array("d")
     for index in range(sample_count):
         phase = math.tau * index / sample_count
-        # All envelope periods divide the loop length. They modulate noise only;
-        # there are no musical tones, alarm effects, or imported recordings.
+        # 돌풍 세기 조절
         gust = (0.68 + 0.18 * math.sin(phase + 0.4)
                 + 0.10 * math.sin(3.0 * phase + 1.2)
                 + 0.04 * math.sin(5.0 * phase + 0.7))
@@ -63,13 +61,12 @@ def generate():
                    + air_gain * air_band[index])
         samples.append(texture * gust)
 
-    # Keep the background sound quiet, with plenty of headroom for later effects.
+    # 배경음 음량 조절
     gain = min(0.09 / rms(samples), 0.45 / max(abs(sample) for sample in samples))
     for index in range(sample_count):
         samples[index] *= gain
 
-    # Rotate the periodic signal to a quiet, continuous boundary. No silence or
-    # fade-out is inserted, so the wind does not dip each time it loops.
+    # 반복 시작점 선택
     seam = min(range(sample_count), key=lambda i:
                abs(samples[i]) + 8.0 * abs(samples[i] - samples[i - 1]))
     samples = samples[seam:] + samples[:seam]
@@ -84,7 +81,7 @@ def generate():
         audio.setframerate(SAMPLE_RATE)
         audio.writeframes(pcm.tobytes())
 
-    # Report useful checks without requiring an external audio package.
+    # 음량 검사
     half_second = SAMPLE_RATE // 2
     levels = [rms(samples[i:i + half_second])
               for i in range(0, sample_count - half_second + 1, half_second)]

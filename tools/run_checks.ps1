@@ -15,9 +15,12 @@ foreach ($node in $project.SelectNodes('//m:Import', $ns)) {
         $node.RemoveAttribute('Condition')
     }
 }
+foreach ($node in $project.SelectNodes('//m:Manifest[@Include]', $ns)) {
+    $node.SetAttribute('Include', (Join-Path $root $node.GetAttribute('Include')))
+}
 $namespace = $project.DocumentElement.NamespaceURI
 $group = $project.CreateElement('ItemGroup', $namespace)
-$sources = @('GamePlayer.cpp','GameStage.cpp','GameSession.cpp','GameResources.cpp')
+$sources = @('GamePlayer.cpp','GameStage.cpp','GameSession.cpp','GameSessionCombat.cpp','GameResources.cpp')
 if ($Visual) { $sources += @('GameView.cpp','tests\VisualChecks.cpp') }
 else { $sources += 'tests\GameplayTests.cpp' }
 foreach ($source in $sources) {

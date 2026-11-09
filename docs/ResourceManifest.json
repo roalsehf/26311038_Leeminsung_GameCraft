@@ -1,6 +1,6 @@
 {
-  "textures": 43,
-  "sounds": 7,
+  "textures": 52,
+  "sounds": 8,
   "resources": [
     {
       "path": "resource/RunAndGun_Desert_Assets/backgrounds/desert_full_wide.png",
@@ -10,6 +10,78 @@
       "key": "Background",
       "width": 2172,
       "height": 724
+    },
+    {
+      "path": "resource/campaign/depot_fortress.png",
+      "bytes": 2479540,
+      "sha256": "a43e165067d9d75a898f563dd20f2c33e81373f0d589f3d58615bd5c3b755f76",
+      "kind": "texture",
+      "key": "CampaignBackgrounds",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "resource/campaign/machines.png",
+      "bytes": 1418630,
+      "sha256": "07249e038154ebf430c64eefcf617c9afce08472d1462cb8e429c708cef4e83f",
+      "kind": "texture",
+      "key": "MachineAtlas",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "resource/campaign/vertical_aim.png",
+      "bytes": 704547,
+      "sha256": "bf2531b8c6471c429b4c474e143d161421f53b554e52412e0033bd26cd156e1a",
+      "kind": "texture",
+      "key": "VerticalAim",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/reinforced_concrete.png",
+      "bytes": 9819,
+      "sha256": "2c9ccf02080d53f9e916058390fdd2cc6eb142a667716551cb2f87fb584b84ed",
+      "kind": "texture",
+      "key": "Concrete",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/tiles/rock_wall.png",
+      "bytes": 10426,
+      "sha256": "2b335a34e7e8e500d9cec96ea5884daf52c6b29277cce99f1b200e0c775c7129",
+      "kind": "texture",
+      "key": "RockWall",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/warning_light.png",
+      "bytes": 22743,
+      "sha256": "15787d5708c7620d024715ec331cc42ba4a737686d8f4545e140f094d6720c5b",
+      "kind": "texture",
+      "key": "WarningLight",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/props/metal_door.png",
+      "bytes": 29207,
+      "sha256": "bb2b68fdc888c386d8b1d1be2a71382f5e04b4810050762c334f29e519b52e33",
+      "kind": "texture",
+      "key": "MetalDoor",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "path": "resource/RunAndGun_Desert_Assets/items/heavy_machinegun.png",
+      "bytes": 16563,
+      "sha256": "7e1a0a2d243658c5020678b974fc52854457e1db48ee71e4382fe17fb537ad29",
+      "kind": "texture",
+      "key": "MachineGunPickup",
+      "width": 192,
+      "height": 96
     },
     {
       "path": "resource/player/soldier_actions_v2.png",
@@ -327,6 +399,15 @@
       "height": 128
     },
     {
+      "path": "resource/RunAndGun_Desert_Assets/effects/sand_dust.png",
+      "bytes": 12392,
+      "sha256": "81b55737e5387e11799cc1a3e79d00cab0d85b7f9382c3cd08f8accacac0897f",
+      "kind": "texture",
+      "key": "Dust",
+      "width": 128,
+      "height": 128
+    },
+    {
       "path": "resource/RunAndGun_Desert_Assets/items/health_kit.png",
       "bytes": 12334,
       "sha256": "643dcac3974b09560ad80aeed76a00a664e1c7f181410570ea8874d5ada0eada",
@@ -390,14 +471,24 @@
       "height": 24
     },
     {
-      "path": "resource/sound/desert_wind.wav",
-      "bytes": 1058444,
-      "sha256": "ec430bd14de03dfbe82c5cf0c9b15777043d02a09784ac54df5c7844deb8c920",
+      "path": "resource/sound/negev_desert_loop.wav",
+      "bytes": 7408844,
+      "sha256": "922e457cb18b66d4739cc4ef428b510f1f1d7a7e7bb687a2892ea4f9afed6198",
       "kind": "sound",
-      "channels": 1,
-      "sampleRate": 22050,
-      "seconds": 24.0,
-      "peakPCM": 14745
+      "channels": 2,
+      "sampleRate": 44100,
+      "seconds": 42.0,
+      "peakPCM": 17290
+    },
+    {
+      "path": "resource/sound/negev_fight_loop.wav",
+      "bytes": 6513276,
+      "sha256": "3774bced87f33eb06e1dcf16e50395ac8be66a8fbf7fc14d7b773485c756daf9",
+      "kind": "sound",
+      "channels": 2,
+      "sampleRate": 44100,
+      "seconds": 36.9231,
+      "peakPCM": 13167
     },
     {
       "path": "resource/sound/shot.wav",

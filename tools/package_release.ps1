@@ -4,7 +4,8 @@ $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer
 $vsRoot = & $vswhere -latest -products '*' -requires Microsoft.Component.MSBuild -property installationPath
 & (Join-Path $vsRoot 'MSBuild\Current\Bin\MSBuild.exe') (Join-Path $root '26311038_Leeminsung_GameCraft.sln') /t:Build /p:Configuration=Release /p:Platform=x64 /verbosity:minimal /nologo
 if ($LASTEXITCODE -ne 0) { throw 'Release build failed.' }
-$finalPackage = Join-Path $root 'dist\GameCraft-f4'
+$packageName = 'GameCraft-3Stages'
+$finalPackage = Join-Path $root ('dist\' + $packageName)
 $package = Join-Path $root ('.tools\package-stage-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $package -Force | Out-Null
 $release = Join-Path $root 'bin\x64\Release'
@@ -28,7 +29,7 @@ foreach ($name in @('LICENSE.txt','NOTICE.md')) {
 }
 $workspacePrefix = [IO.Path]::GetFullPath($root) + [IO.Path]::DirectorySeparatorChar
 $backupRoot = Join-Path $root '.tools\package-backups'
-$backup = Join-Path $backupRoot ('GameCraft-f4-' + [Guid]::NewGuid().ToString('N'))
+$backup = Join-Path $backupRoot ($packageName + '-' + [Guid]::NewGuid().ToString('N'))
 foreach ($candidate in @($package,$finalPackage,$backup)) {
     if (![IO.Path]::GetFullPath($candidate).StartsWith($workspacePrefix,[StringComparison]::OrdinalIgnoreCase)) {
         throw 'Package path escapes the workspace.'
@@ -40,6 +41,6 @@ if (Test-Path -LiteralPath $finalPackage) {
     Move-Item -LiteralPath $finalPackage -Destination $backup
 }
 Move-Item -LiteralPath $package -Destination $finalPackage
-$archive = Join-Path $root 'dist\GameCraft-f4.zip'
+$archive = Join-Path $root ('dist\' + $packageName + '.zip')
 Compress-Archive -Path (Join-Path $finalPackage '*') -DestinationPath $archive -Force
 Write-Output ('Release package: ' + $archive)

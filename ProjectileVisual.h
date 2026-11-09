@@ -8,7 +8,7 @@ struct ProjectileAppearance
     float width,height;
 };
 
-// 투명 여백/잔상을 제외한 실제 탄체 크기입니다. 플레이어 자세와 무관합니다.
+// 투사체 표시 크기
 inline ProjectileAppearance ProjectileArt(bool explosive,bool hostile)
 {
     if(explosive && !hostile) return {GameTexture::GrenadeProjectile,87,38,128,83,20,22};

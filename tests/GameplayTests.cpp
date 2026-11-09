@@ -1,15 +1,114 @@
 #include "GameSession.h"
 #include "GameplayBot.h"
 #include "ProjectileVisual.h"
+#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <stdexcept>
 
 void Check(bool ok,const char* message) { if(!ok) throw std::runtime_error(message); }
+
+void CheckTimingAndTerrain()
+{
+    int shotCount=0;
+    for(int fps:{30,60,144})
+    {
+        GameSession game;
+        game.Restart();
+        GameInput runAndFire;
+        runAndFire.right=runAndFire.fire=true;
+        int shots=0;
+        for(int i=0;i<fps;++i)
+        {
+            game.Update(1.0F/fps,runAndFire);
+            shots+=static_cast<int>(std::count(game.Sounds().begin(),game.Sounds().end(),GameSound::Shot));
+        }
+        if(fps==30) shotCount=shots;
+        Check(shots==shotCount&&shots>=6,"fixed simulation preserves fire cadence at different render rates");
+        Check(std::abs(game.Time()-1)<0.001F &&
+            std::abs(game.Player().X()-GameConfig::StartX-GameConfig::MoveSpeed)<0.05F,
+            "fixed simulation preserves run speed at different render rates");
+    }
+
+    GameSession game;
+    game.Restart();
+    GameInput tap;
+    tap.jump=tap.grenade=true;
+    game.Update(0.002F,tap);
+    Check(game.Grenades()==3&&game.Player().IsGrounded(),"short render frame has no physics step");
+    game.Update(1.0F/60,{});
+    Check(game.Grenades()==2&&!game.Player().IsGrounded()&&
+        std::count(game.Sounds().begin(),game.Sounds().end(),GameSound::Jump)==1,
+        "jump and grenade edges survive until the next simulation step");
+
+    game.Restart();
+    game.Update(0.002F,tap);
+    game.Suspend();
+    GameInput resume;
+    resume.pause=true;
+    game.Update(1.0F/60,resume);
+    game.Update(1.0F/60,{});
+    Check(game.State()==PlayState::Playing&&game.Grenades()==3&&game.Player().IsGrounded(),
+        "focus pause clears queued input before resuming");
+
+    game.Restart();
+    GameInput right;
+    right.right=true;
+    for(int i=0;i<78;++i) game.Update(1.0F/60,right);
+    GameInput throwGrenade;
+    throwGrenade.grenade=true;
+    game.Update(1.0F/60,throwGrenade);
+    for(int i=0;i<67;++i) game.Update(1.0F/60,{});
+    Check(std::any_of(game.Effects().begin(),game.Effects().end(),[](const GameEffect& effect)
+        { return effect.kind==EffectKind::Explosion && effect.x>700 && effect.x<956 && std::abs(effect.y-436)<0.05F; }),
+        "descending grenade explodes on the first catwalk it touches");
+    for(int i=0;i<74;++i) game.Update(1.0F/60,right);
+    GameInput jump;
+    jump.jump=true;
+    game.Update(1.0F/60,jump);
+    for(int i=0;i<70;++i) game.Update(1.0F/60,{});
+    Check(game.Player().IsGrounded()&&game.Player().Y()==436,"drop test starts on the first catwalk");
+    jump.crouch=true;
+    game.Update(0.002F,jump);
+    game.Update(1.0F/60,{});
+    Check(!game.Player().IsGrounded()&&game.Player().Y()>436 && game.Sounds().empty(),
+        "drop-through chord remains a drop even if released before the physics step");
+}
+
+void CheckMortarWarning(GameSession game)
+{
+    const auto warning=[&]() -> const EnemyAttack* {
+        for(const Enemy& enemy:game.Enemies())
+            if(enemy.kind==EnemyKind::Boss&&enemy.attack.kind==AttackKind::Mortar) return &enemy.attack;
+        return nullptr;
+    };
+    for(int i=0;i<150&&!warning()&&game.State()==PlayState::Playing;++i)
+        game.Update(1.0F/60,{});
+    Check(warning()&&warning()->shotCount>0,"fortress warns before launching its mortar");
+    const float landingX=warning()->shots[0].landingX;
+    GameInput dodge;
+    dodge.right=true;
+    for(int i=0;i<29;++i) game.Update(1.0F/60,dodge);
+    Check(warning()&&warning()->shots[0].landingX==landingX&&game.Player().X()-landingX>100,
+        "mortar marker stays fixed as the player moves out of range");
+    const int health=game.Health();
+    bool released=false,landed=false;
+    for(int i=0;i<105;++i)
+    {
+        game.Update(1.0F/60,{});
+        for(const Projectile& shot:game.Projectiles())
+            released|=shot.type==ProjectileType::Mortar&&shot.landingX==landingX;
+        for(const GameEffect& effect:game.Effects())
+            landed|=effect.kind==EffectKind::Explosion&&effect.x==landingX&&effect.y==GameConfig::GroundY;
+    }
+    Check(released&&landed&&game.Health()==health,"dodged mortar detonates at the marked point");
+}
+
 int main()
 {
     try
     {
+        CheckTimingAndTerrain();
         for(int fps:{30,60,144})
         {
             GamePlayer player; GameStage stage;
@@ -47,9 +146,24 @@ int main()
         poses.Restart(); GameInput throwCrouched; throwCrouched.crouch=true; throwCrouched.grenade=true;
         poses.Update(1.0F/60,throwCrouched);
         Check(poses.Pose()==PlayerPose::Crouch&&poses.Throwing(),"crouched grenade must not switch to tall standing pose");
-        Check(poses.Grenades()==2&&poses.Projectiles().size()==1&&poses.Projectiles()[0].explosive,"crouch grenade spawn");
+        Check(poses.Grenades()==2&&poses.Projectiles().size()==1&&poses.Projectiles()[0].type==ProjectileType::Grenade,"crouch grenade spawn");
         Check(grenadeArt.width==20&&grenadeArt.height==22,"grenade display dimensions are fixed");
         Check(ProjectileArt(false,false).width>=30,"rifle bullet must remain readable");
+        poses.Restart(); GameInput fireUp; fireUp.aimUp=true; fireUp.fire=true;
+        poses.Update(1.0F/60,fireUp);
+        Check(poses.Pose()==PlayerPose::AimUp && poses.VisualFrame().Vertical() && poses.Shooting(),"aim up uses matching vertical sprite");
+        Check(poses.Projectiles().size()==1 && poses.Projectiles().front().vx==0 && poses.Projectiles().front().vy<0,"up projectile velocity");
+        poses.Restart(); GameInput takeoff; takeoff.jump=true; poses.Update(1.0F/60,takeoff);
+        for(int i=0;i<17;++i) poses.Update(1.0F/60,{});
+        poses.Update(1.0F/60,crouchFire);
+        Check(poses.Pose()==PlayerPose::AimDown && !poses.Crouching() && poses.Shooting(),"air S aims down, not crouch");
+        Check(poses.Projectiles().size()==1 && poses.Projectiles().front().vx==0 && poses.Projectiles().front().vy>0,"down projectile velocity");
+        GameSession dive; dive.Restart(); GameInput forward; forward.right=true;
+        for(int i=0;i<200&&dive.Player().X()<dive.Enemies().front().x-105;++i) dive.Update(1.0F/60,forward);
+        forward.jump=true; dive.Update(1.0F/60,forward); forward.jump=false;
+        for(int i=0;i<30&&dive.Player().X()<dive.Enemies().front().x-5;++i) dive.Update(1.0F/60,forward);
+        for(int i=0;i<16;++i) dive.Update(1.0F/60,crouchFire);
+        Check(dive.Enemies().front().hp<2,"airborne down fire hits a ground soldier");
         GameSession lifecycle; lifecycle.Restart();
         GameInput kill; kill.fire=true;
         bool corpseObserved=false; float corpseX=0,corpseY=0; int corpseFacing=0;
@@ -69,44 +183,76 @@ int main()
         for(const Enemy& e:lifecycle.Enemies()) Check(e.home!=640,"expired corpse must be removed from world");
         GameSession game;
         Check(game.State()==PlayState::Title,"title screen");
+        Check(game.Music()==GameMusic::Silence,"title has no stage or boss loop");
         GameInput start; start.start=true; game.Update(0.016F,start);
         Check(game.State()==PlayState::Playing&&game.Enemies().size()==10,"start spawns complete stage");
+        Check(game.Music()==GameMusic::Stage,"deploy starts the stage loop");
+        auto waiting=game;
+        bool visibleWarning=false;
+        for(int i=0;i<220;++i)
+        {
+            waiting.Update(1.0F/60,{});
+            for(const Enemy& enemy:waiting.Enemies())
+            {
+                if(enemy.home==640) visibleWarning|=enemy.attack.Active();
+                if(enemy.home>=1160) Check(!enemy.attack.Active(),"offscreen enemies cannot wind up a shot");
+            }
+        }
+        Check(visibleWarning,"visible soldiers still warn and shoot normally");
         GameInput pause; pause.pause=true; game.Update(0.016F,pause); const float pausedTime=game.Time();
         for(int i=0;i<60;++i) game.Update(0.016F,{});
         Check(game.State()==PlayState::Paused&&game.Time()==pausedTime,"pause freezes gameplay");
+        Check(game.Music()==GameMusic::Stage,"pause keeps the selected music");
         game.Update(0.016F,pause);
-        // An ordinary player strategy: advance, crouch and fire, grenade the boss.
-        float engagedHome=-1;
-        for(int i=0;i<18000 && game.State()==PlayState::Playing;++i)
+        for(int stageIndex=1;stageIndex<=StageCount;++stageIndex)
         {
-            GameInput input; const Enemy* target=nullptr;
-            for(const Enemy& e:game.Enemies()) if(e.hp>0&&e.x>game.Player().X()-80
-                &&(!target||e.x<target->x)) target=&e;
-            if(target && (target->home==engagedHome || target->x-game.Player().X()<(target->kind==EnemyKind::Boss?400:600)))
+            Check(game.StageNumber()==stageIndex&&game.Stage().CameraX()==0,"stage starts from its own spawn");
+            if(stageIndex==2)
             {
-                engagedHome=target->home;
-                input.crouch=true; input.fire=true;
-                input.grenade=target->kind==EnemyKind::Boss && game.Grenades()>0;
-                if(game.Player().Y()<target->y-54)
-                { input={}; input.right=true; }
-                else if(game.Player().IsFacingLeft())
-                { input.crouch=false; input.right=true; }
+                auto checkpoint=game;
+                const int score=checkpoint.Score();
+                for(int i=0;i<3000&&checkpoint.State()==PlayState::Playing;++i) checkpoint.Update(1.0F/60,{});
+                Check(checkpoint.State()==PlayState::GameOver,"depot checkpoint can fail normally");
+                Check(checkpoint.Music()==GameMusic::Silence,"game over stops music");
+                checkpoint.Update(1.0F/60,start);
+                Check(checkpoint.StageNumber()==2&&checkpoint.State()==PlayState::Playing&&checkpoint.Score()==score&&checkpoint.Health()==3,
+                    "retry restores current stage and entry score");
+                Check(checkpoint.Music()==GameMusic::Stage,"checkpoint retry restores stage music");
             }
-            else input.right=true;
-            if(!input.crouch && game.Player().IsGrounded())
-                for(const Projectile& b:game.Projectiles())
-                    if(b.hostile && std::abs(b.x-game.Player().X())<160 && std::abs(b.y-game.Player().Y()+65)<90)
-                        input.jump=true;
-            const int previousHp=game.Health();
-            if(i%3000==0) std::printf("Bot x=%.1f y=%.1f facing=%d target=%.1f hp=%d left=%d right=%d fire=%d\n",game.Player().X(),game.Player().Y(),game.Player().IsFacingLeft(),target?target->x:0,target?target->hp:0,input.left,input.right,input.fire);
-            game.Update(1.0F/60,input);
-            if(game.Health()!=previousHp) std::printf("Damage t=%.1f x=%.1f y=%.1f hp=%d kills=%d\n",game.Time(),game.Player().X(),game.Player().Y(),game.Health(),game.Kills());
+            float engaged=-1; bool upward=false,acquiredAmmo=false,killedDrone=false;
+            bool bossMusic=false,stageMusicAfterBoss=false,mortarChecked=false;
+            for(int i=0;i<18000&&game.State()==PlayState::Playing;++i)
+            {
+                const auto input=VerificationInput(game,engaged);
+                game.Update(1.0F/60,input);
+                bossMusic|=game.Music()==GameMusic::Boss;
+                stageMusicAfterBoss|=bossMusic&&game.BossDead()&&game.Music()==GameMusic::Stage;
+                upward|=game.Shooting()&&game.Aim()==AimDirection::Up;
+                acquiredAmmo|=game.MachineGunAmmo()>0;
+                for(const Enemy& e:game.Enemies()) killedDrone|=e.kind==EnemyKind::Drone&&e.hp<=0;
+                if(stageIndex==3 && game.BossEngaged() && !mortarChecked)
+                {
+                    CheckMortarWarning(game);
+                    mortarChecked=true;
+                }
+            }
+            std::printf("Stage %d: state=%d hp=%d stage kills=%d score=%d stage time=%.1f x=%.1f y=%.1f up=%d ammo=%d drone=%d\n",
+                game.StageNumber(),static_cast<int>(game.State()),game.Health(),game.StageKills(),game.Score(),game.StageTime(),game.Player().X(),game.Player().Y(),upward,acquiredAmmo,killedDrone);
+            if(game.State()==PlayState::Playing) for(const Enemy& e:game.Enemies())
+                std::printf("Remaining: kind=%d x=%.1f y=%.1f hp=%d\n",static_cast<int>(e.kind),e.x,e.y,e.hp);
+            Check(game.State()==(stageIndex<StageCount?PlayState::StageClear:PlayState::Clear)&&game.BossDead(),"normal input must beat every stage boss and reach exit");
+            Check(bossMusic&&stageMusicAfterBoss&&game.Music()==GameMusic::Silence,"every stage switches to boss, back to stage, and then stops on results");
+            for(const Enemy& e:game.Enemies()) Check(e.kind!=EnemyKind::Boss,"clear must persist after boss corpse removal");
+            if(stageIndex==2) Check(upward&&acquiredAmmo&&killedDrone,"depot uses vertical combat, drone and machine gun supplies");
+            if(stageIndex==3) Check(mortarChecked,"fortress mortar regression ran");
+            if(stageIndex<StageCount)
+            {
+                const int score=game.Score();
+                game.Update(1.0F/60,start);
+                Check(game.State()==PlayState::Playing&&game.Score()==score&&!game.BossDead()&&game.Projectiles().empty(),"next stage carries score and clears stage state");
+                Check(game.Music()==GameMusic::Stage,"next stage starts its own stage loop");
+            }
         }
-        std::printf("Full run: state=%d hp=%d kills=%d score=%d time=%.1f x=%.1f\n",
-            static_cast<int>(game.State()),game.Health(),game.Kills(),game.Score(),game.Time(),game.Player().X());
-        Check(game.State()==PlayState::Clear&&game.BossDead(),"normal gameplay must reach clear");
-        for(const Enemy& e:game.Enemies()) Check(e.kind!=EnemyKind::Boss,"clear must persist after boss corpse removal");
-        Check(game.Kills()==10&&game.Score()>=4000,"combat and scoring");
         GameInput retry; retry.retry=true; game.Update(0.016F,retry);
         Check(game.State()==PlayState::Playing&&game.Health()==3&&game.Grenades()==3&&game.Score()==0&&game.Time()==0,"clear restart resets all state");
         Check(game.Projectiles().empty()&&game.Kills()==0&&!game.BossDead(),"restart clears entities and boss");
@@ -114,7 +260,7 @@ int main()
         Check(game.State()==PlayState::GameOver,"enemy fire causes game over");
         game.Update(0.016F,retry);
         Check(game.State()==PlayState::Playing&&game.Health()==3,"game over restart");
-        std::puts("PASS: movement, poses, muzzle, projectiles, death cleanup, platforms, camera, full clear, restart.");
+        std::puts("PASS: frame timing, buffered input, catwalks, enemy warnings, directional combat, three-stage campaign and retry.");
         return 0;
     }
     catch(const std::exception& e) { std::fprintf(stderr,"FAIL: %s\n",e.what()); return 1; }

@@ -1,4 +1,4 @@
-"""Original short PCM effects. No external audio or runtime Python dependency."""
+"""효과음 생성."""
 from pathlib import Path
 import math, random, wave, struct
 

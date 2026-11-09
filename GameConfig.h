@@ -2,7 +2,7 @@
 
 namespace GameConfig
 {
-    // 이전 프로젝트 세팅의 논리 해상도를 유지합니다.
+    // 화면 해상도
     inline constexpr int ScreenWidth = 960;
     inline constexpr int ScreenHeight = 600;
     inline constexpr float WorldWidth = 5120.0F;
@@ -11,5 +11,5 @@ namespace GameConfig
     inline constexpr float GroundY = 520.0F;
     inline constexpr float StartX = 160.0F;
     inline constexpr float MoveSpeed = 260.0F; // 초당 픽셀
-    inline constexpr float RunFrameSeconds = 0.075F; // 연속 달리기 8프레임
+    inline constexpr float RunFrameSeconds = 0.075F; // 달리기 프레임 간격
 }

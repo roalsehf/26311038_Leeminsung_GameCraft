@@ -1,9 +1,13 @@
 # 배경 사운드 출처
 
+- `negev_desert_loop.wav`: 사용자 제공 `Negev Desert Loop.wav`의 스테이지 재생용 복사본.
+- `negev_fight_loop.wav`: 사용자 제공 `Negev Fight Loop.wav`의 보스전 재생용 복사본.
+- 두 곡 모두 44.1 kHz 스테레오 PCM16입니다. 원본 길이와 편곡을 유지하고 음량 및 양 끝 4ms만 조정했습니다.
+
 `desert_wind.wav`는 이 프로젝트를 위해 직접 합성한 사막 바람 배경음입니다.
 외부 녹음, 기존 음악, 게임 사운드 샘플은 사용하지 않았습니다.
 
-- 용도: 게임 실행 중 반복 재생하는 바람 환경음
+- 용도: 이전 버전의 바람 환경음. 현재 버전에서는 보관용입니다.
 - 형식: WAV, 16-bit PCM, 모노, 22,050 Hz
 - 길이: 24초
 - 생성 방법: 난수 잡음을 대역별로 필터링하고 느린 바람 세기 변화를 적용
@@ -14,4 +18,4 @@
 
 추가 효과음은 tools/generate_effects.py로 합성한 원본 PCM16 모노 사운드입니다.
 shot.wav(사격), explosion.wav(폭발), hurt.wav(피격), pickup.wav(획득), clear.wav(클리어), jump.wav(점프)를 사용합니다.
-외부 녹음이나 음악을 사용하지 않았으며 Python 표준 라이브러리로 재생성할 수 있습니다. 게임 실행에는 Python이 필요하지 않습니다.
+이 효과음들은 Python 표준 라이브러리로 재생성할 수 있습니다. 게임 실행에는 Python이 필요하지 않습니다.
